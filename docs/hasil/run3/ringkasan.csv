@@ -1,0 +1,15 @@
+keluarga,setara,sqlite_ms,neo4j_ms,rasio,pemenang,hasil_sama,n,token_sql,token_cypher,acuan
+Pencarian titik (user_id),200 id acak; waktu per pencarian,0.013221499993960606,0.6915254999876197,0.019119323863252054,SQLite,True,,11,17,Cheng dkk. 2019
+Agregasi atribut (GROUP BY gender),jumlah dan umur rata-rata per gender,1.017300000967225,2.1020000021962915,0.48396764981174645,SQLite,True,,17,16,Cheng dkk. 2019
+Agregasi struktur (top-10 out-degree),GROUP BY atas semua edge,4.325300000346033,17.740400002367096,0.24381073706167333,SQLite,True,,20,17,Cheng dkk. 2019
+Rekomendasi teman (top-10),jumlah 5 user uji,13.608699999167584,68.49820000206819,0.19867237385444717,SQLite,True,5.0,65,27,LDBC SNB Q10 (Erling dkk. 2015)
+Teman tepat 1 relasi: himpunan unik,SQL DISTINCT per level vs Cypher pruning; jumlah 5 user,0.3585999984352384,5.012800000258721,0.07153686530815717,SQLite,True,5.0,28,17,Hassan dkk. 2018; Rodriguez dan Neubauer 2010
+Teman tepat 2 relasi: himpunan unik,SQL DISTINCT per level vs Cypher pruning; jumlah 5 user,3.5608999969554134,10.883699997066287,0.3271773383973518,SQLite,True,5.0,45,17,Hassan dkk. 2018; Rodriguez dan Neubauer 2010
+Teman tepat 3 relasi: himpunan unik,SQL DISTINCT per level vs Cypher pruning; jumlah 5 user,31.211999998049578,28.35609999965527,1.1007155426320625,Neo4j,True,5.0,62,17,Hassan dkk. 2018; Rodriguez dan Neubauer 2010
+Teman tepat 4 relasi: himpunan unik,SQL DISTINCT per level vs Cypher pruning; jumlah 4 user,74.03650000196649,54.04439999983879,1.3699199177377737,Neo4j,True,4.0,79,17,Hassan dkk. 2018; Rodriguez dan Neubauer 2010
+Teman tepat 2 relasi: semua path,SQL JOIN berulang vs Cypher count(p); jumlah 5 user,5.821799997647759,11.384100002032937,0.5113974751283035,SQLite,True,5.0,33,22,Hassan dkk. 2018; Rodriguez dan Neubauer 2010
+Teman tepat 3 relasi: semua path,SQL JOIN berulang vs Cypher count(p); jumlah 5 user,231.13589999411488,195.32519999484066,1.183338862574927,Neo4j,True,5.0,50,22,Hassan dkk. 2018; Rodriguez dan Neubauer 2010
+Teman tepat 4 relasi: semua path,SQL JOIN berulang vs Cypher count(p); jumlah 3 user,1135.7374999970489,911.591900006897,1.2458837117666972,Neo4j,True,3.0,76,22,Hassan dkk. 2018; Rodriguez dan Neubauer 2010
+Teman tepat 3 relasi: JOIN vs pruning,SQL JOIN berulang vs Cypher tanpa count(p) (cara menulis yang paling umum),231.13589999411488,28.35609999965527,8.151187927709552,Neo4j,True,5.0,50,17,Hassan dkk. 2018; Rodriguez dan Neubauer 2010
+Jalur terpendek (maks 8 relasi),20 pasangan user (sebagian tidak terhubung),1156.2051000037172,31.189299996185582,37.07056907802098,Neo4j,True,20.0,44,15,LDBC SNB Q13; Miler dkk. 2014; Holsch dkk. 2017
+Teman dari teman + filter atribut,S1 semua di SQLite vs S2 semua di Neo4j; jumlah 5 user,4.5702999996137805,9.015999996336177,0.5069099380513541,SQLite,True,5.0,48,29,Backstrom dan Leskovec 2011; Hassan dkk. 2018

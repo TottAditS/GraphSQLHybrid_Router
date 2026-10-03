@@ -1,0 +1,6 @@
+# Python 3.10+
+# Rentang versi di bawah sudah diuji dengan pandas 3.0 + neo4j 6.3 + python-dotenv 1.2
+# (pip otomatis memilih versi terbaru yang cocok dengan versi Python Anda).
+pandas>=2.2,<4
+neo4j>=5.26,<7
+python-dotenv>=1.0,<2

@@ -1,0 +1,4 @@
+keluarga,keterangan,sqlite_ms,neo4j_ms,neo4j_server_ms,sqlite_q1,sqlite_q3,neo4j_q1,neo4j_q3,sama,berkas_query
+Pencarian titik (user_id),200 id acak; waktu per pencarian,0.012595499993039994,0.6992655000067316,0.19,0.012546500001917593,0.013326499993127072,0.6886914999995497,0.7036850000076811,True,pencarian_titik
+Agregasi atribut (GROUP BY gender),jumlah dan umur rata-rata per gender,0.9533000011288095,1.8028000013146084,0.0,0.9417500023118919,0.9910500011756085,1.7504499992355704,1.9391999994695652,True,agregasi_gender
+Agregasi struktur (top-10 out-degree),GROUP BY atas semua edge,4.341299998486647,18.428399998811074,18.0,4.163549998338567,4.376949998913915,18.156300000555348,18.78084999952989,True,agregasi_derajat

@@ -1,0 +1,17 @@
+# Dataset besar (.gz ratusan MB) + semua hasil turunannya (CSV sampel, pokec.db).
+# Semuanya bisa dibuat ulang dengan menjalankan scripts/01 dan scripts/02.
+data/*
+!data/.gitkeep
+
+# Kredensial Neo4j - JANGAN pernah di-commit. Pakai .env.example sebagai template.
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/

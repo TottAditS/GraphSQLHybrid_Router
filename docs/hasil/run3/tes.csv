@@ -1,0 +1,41 @@
+kelompok,tes,hasil,waktu_ms,keterangan
+0. Persiapan,"Prasyarat (password, localhost, CSV, SQLite) siap",LULUS,,lihat daftar di atas
+0. Persiapan,Neo4j menyala dan menerima koneksi,LULUS,12614.512000000104,dinyalakan oleh notebook ini
+0. Persiapan,Koneksi Neo4j + SQLite terbuka; tabel friendships dibuat,LULUS,127.34609999824897,"72,004 baris edge di SQLite"
+0. Persiapan,Profil struktur sampel dihitung dari CSV,LULUS,1346.6460999989067,"resiprositas 71.1%, klasterisasi 0.188"
+1. Konsistensi lintas basis data,Graf Neo4j sama dengan CSV (node dan relasi),LULUS,346.80370000205585,"User=4,505, Hobby=60, FRIEND=72,004, HAS_HOBBY=19,512"
+1. Konsistensi lintas basis data,"SQLite: jumlah baris, integritas, foreign key",LULUS,24.814800002786797,"users=4,505, hobbies=19,512, integrity=ok, pelanggaran FK=0"
+1. Konsistensi lintas basis data,"Himpunan user, edge, dan user-hobi identik di Neo4j dan SQLite",LULUS,2553.257700001268,"4,505 user, 72,004 edge, 19,512 pasangan user-hobi; selisih di kedua arah: 0"
+1. Konsistensi lintas basis data,"Atribut duplikat (gender, age, region) sinkron untuk semua user",LULUS,166.86799999661162,"13,515 nilai dibandingkan, 0 berbeda"
+1. Konsistensi lintas basis data,SQLite: pencarian user_id memakai index (PRIMARY KEY),LULUS,0.6171000022732187,SEARCH users USING INTEGER PRIMARY KEY (rowid=?)
+2. Sinkronisasi dan drift,Sinkron ulang (script 03) idempoten: tidak ada node atau relasi ganda,LULUS,3255.349200000637,"kode keluar 0; User=4,505, Hobby=60, FRIEND=72,004, HAS_HOBBY=19,512"
+2. Sinkronisasi dan drift,"Drift: 3 penyimpangan disuntik, terdeteksi persis, lalu diperbaiki",LULUS,533.5469000019657,"disuntik 3, terdeteksi 3, tersisa setelah perbaikan 0; perbaikan 37 ms"
+3. Kebenaran fungsi hybrid,rekomendasi_teman: user demo (37947),LULUS,238.50920000040787,10 kandidat; teratas 250680 (8 teman bersama)
+3. Kebenaran fungsi hybrid,rekomendasi_teman: hub terbesar (103095),LULUS,86.95329999682144,10 kandidat; teratas 80462 (41 teman bersama)
+3. Kebenaran fungsi hybrid,rekomendasi_teman: user tanpa teman (17137),LULUS,10.405400000308873,0 kandidat
+3. Kebenaran fungsi hybrid,cari_komunitas_hobi: hobi populer ('sportovanie'),LULUS,426.4441000013903,"1 klaster, terbesar 1312"
+3. Kebenaran fungsi hybrid,cari_komunitas_hobi: hobi niche ('chovatelstvo'),LULUS,28.732100003253436,"13 klaster, terbesar 41"
+3. Kebenaran fungsi hybrid,cari_komunitas_hobi: hobi yang tidak ada ('hobi-yang-tidak-ada'),LULUS,8.96920000013779,0 klaster
+3. Kebenaran fungsi hybrid,user_paling_terhubung(10),LULUS,50.81810000046971,teratas user 103095 (353 relasi)
+3. Kebenaran fungsi hybrid,rekomendasi_hobi_sama: user demo (37947),LULUS,170.64060000120662,10 kandidat
+3b. Penggabungan Neo4j + SQLite,Profil SQLite sama dengan CSV: rekomendasi_teman (user demo),LULUS,0.00039999940781854093,10 baris x 4 kolom profil dicocokkan
+3b. Penggabungan Neo4j + SQLite,Profil SQLite sama dengan CSV: cari_komunitas_hobi (hobi niche),LULUS,0.000300002284348011,93 baris x 4 kolom profil dicocokkan
+3b. Penggabungan Neo4j + SQLite,Profil SQLite sama dengan CSV: user_paling_terhubung,LULUS,0.00039999940781854093,10 baris x 4 kolom profil dicocokkan
+3b. Penggabungan Neo4j + SQLite,Profil SQLite sama dengan CSV: rekomendasi_hobi_sama,LULUS,0.000300002284348011,10 baris x 4 kolom profil dicocokkan
+4. Kesetaraan hasil dan kinerja,Pencarian titik (user_id): hasil SQLite = Neo4j,LULUS,942.5441000021237,"SQLite 0.013 ms, Neo4j 0.692 ms"
+4. Kesetaraan hasil dan kinerja,Agregasi atribut (GROUP BY gender): hasil SQLite = Neo4j,LULUS,59.235100001387764,"SQLite 1.017 ms, Neo4j 2.102 ms"
+4. Kesetaraan hasil dan kinerja,Agregasi struktur (top-10 out-degree): hasil SQLite = Neo4j,LULUS,229.34010000244598,"SQLite 4.325 ms, Neo4j 17.740 ms"
+4. Kesetaraan hasil dan kinerja,Rekomendasi teman: hasil SQL = Cypher (5 user),LULUS,661.6263999967487,"5 user; total SQLite 13.6 ms, Neo4j 68.5 ms"
+4. Kesetaraan hasil dan kinerja,"Rencana Cypher: count(p) menyusuri semua path, tanpa count(p) memakai pemangkasan (Pruning)",LULUS,82.53189999959432,count(p): ['VarLengthExpand(All)']; tanpa count(p): ['VarLengthExpand(Pruning)']
+4. Kesetaraan hasil dan kinerja,Teman tepat k relasi (k=1..4): empat cara identik dan sama dengan Python murni,LULUS,13476.899199999025,19 kombinasi user-k; 16 dicocokkan dengan Python murni; 1 kasus 'semua path' dilewati karena terlalu banyak path
+4. Kesetaraan hasil dan kinerja,Jalur terpendek: Cypher = SQL (recursive CTE) = BFS Python (20 pasangan),LULUS,4801.77040000126,"16 terhubung (jarak 2-6), 4 tidak terhubung; total SQLite 1156 ms, Neo4j 31 ms"
+4. Kesetaraan hasil dan kinerja,Teman dari teman + filter atribut: S1 (SQL) = S2 (Neo4j) = S3 (hybrid),LULUS,799.3745999992825,"5 user; hybrid mengirim 3,862 id dari Neo4j ke SQLite"
+5. Biaya hybrid,Biaya lintas batas: atribut N user dari SQLite vs dari node Neo4j,LULUS,1184.1072999995959,"N=4,505: SQLite 8.9 ms, Neo4j 131.5 ms"
+5. Biaya hybrid,Ukuran penyimpanan terukur,LULUS,77.74749999953201,lihat tabel
+6. Skala (graf sintetis),Graf sintetis 10 ribu dan 40 ribu user: empat cara memberi hasil identik,LULUS,33832.78729999802,"2 ukuran graf, sampai 544,025 edge; muat ke Neo4j 7.7 dtk vs SQLite 0.72 dtk"
+6. Skala (graf sintetis),Graf asli utuh dan graf sintetis sudah dihapus,LULUS,78.23709999865969,"User=4,505, Hobby=60, FRIEND=72,004, HAS_HOBBY=19,512; sisa node sintetis 0"
+8. Gambar statis,Gambar: model graf Neo4j + skema SQLite,LULUS,313.0490000003192,"docs/visualisasi/02_model_graf_neo4j.png, docs/visualisasi/03_skema_sqlite.png"
+8. Gambar statis,Gambar: jaringan satu user (graf),LULUS,189.7675000000163,docs/visualisasi/04_jaringan_user_demo.png
+8. Gambar statis,Gambar: klaster hobi + distribusi derajat (graf),LULUS,448.34389999959967,"docs/visualisasi/05_klaster_hobi.png, docs/visualisasi/06_distribusi_derajat.png"
+8. Gambar statis,"Gambar: hobi, umur, pendidikan dari tabel SQLite",LULUS,293.80550000132644,"docs/visualisasi/07_hobi_terpopuler.png, docs/visualisasi/08_sebaran_umur.png, docs/visualisasi/09_pendidikan.png"
+7. Penutup,Neo4j dimatikan oleh notebook,LULUS,2990.0081000014325,port Bolt tertutup

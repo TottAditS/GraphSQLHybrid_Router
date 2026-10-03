@@ -1,0 +1,6 @@
+# Tambahan untuk kedua notebook di folder notebooks/ (script 01-04 TIDAK membutuhkan ini).
+# Pasang dengan:  pip install -r requirements-notebook.txt
+-r requirements.txt
+jupyterlab>=4,<5      # sudah termasuk ipykernel dan nbconvert
+matplotlib>=3.8       # grafik benchmark dan visualisasi
+networkx>=3.2         # tata letak gambar graf (murni Python, tanpa internet)

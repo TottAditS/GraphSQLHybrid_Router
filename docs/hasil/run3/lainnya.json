@@ -1,0 +1,139 @@
+{
+ "lingkungan": {
+  "neo4j_server": "Neo4j Kernel 5.26.31 community",
+  "driver_neo4j_python": "6.3.1",
+  "sqlite": "3.53.4",
+  "python": "3.13.16",
+  "pandas": "3.0.6",
+  "os": "Windows-11-10.0.26200-SP0",
+  "prosesor": "Intel64 Family 6 Model 151 Stepping 2, GenuineIntel",
+  "jumlah_cpu": 20
+ },
+ "overhead": {
+  "sqlite_ms": 0.006499998562503606,
+  "neo4j_ms": 0.8428500004811212,
+  "neo4j_server_ms": 0.0
+ },
+ "regresi": {
+  "sqlite_join": {
+   "a_ms": -0.06915551363436737,
+   "b_mikrodetik_per_path": 0.403199843234159,
+   "r2": 0.9998085881390634,
+   "n_titik": 18
+  },
+  "neo4j_enum": {
+   "a_ms": 1.6515076504836481,
+   "b_mikrodetik_per_path": 0.3207494950555861,
+   "r2": 0.9996473908338527,
+   "n_titik": 18
+  }
+ },
+ "regresi_gabungan": {
+  "sqlite_join": {
+   "a_ms": -0.2005341738825318,
+   "b_mikrodetik_per_path": 0.4232745517136605,
+   "r2": 0.9953920640733133,
+   "n_titik": 24
+  },
+  "neo4j_enum": {
+   "a_ms": 3.7299157790095765,
+   "b_mikrodetik_per_path": 0.33791117129021525,
+   "r2": 0.9883727848718509,
+   "n_titik": 24
+  }
+ },
+ "drift": {
+  "sebelum": 0,
+  "disuntik": 3,
+  "terdeteksi": 3,
+  "terdeteksi_tepat": true,
+  "setelah_perbaikan": 0,
+  "waktu_perbaikan_ms": 36.605599998438265,
+  "contoh": [
+   [
+    831,
+    "age",
+    23,
+    22
+   ],
+   [
+    1804,
+    "gender",
+    1,
+    0
+   ],
+   [
+    2199,
+    "region",
+    "drift",
+    "zilinsky kraj, trstena"
+   ]
+  ]
+ },
+ "penyimpanan": {
+  "sqlite_berkas_byte": 2703360,
+  "sqlite_friendships_byte": 991232,
+  "neo4j_store_byte": 28631040,
+  "nilai_atribut_duplikat": 13515,
+  "edge_duplikat_di_sqlite": 72004
+ },
+ "kurva_pemanasan": [
+  458.22279999993043,
+  82.16660000107368,
+  67.28499999735504,
+  39.934999997058185,
+  26.931100001093,
+  29.73250000286498,
+  25.31520000047749,
+  21.968299999571173,
+  21.190699997532647,
+  26.958799997373717,
+  28.295199997955933,
+  18.180999999458436,
+  18.004700003075413,
+  18.860699998185737,
+  18.155300000216812,
+  16.809500000817934,
+  17.477200002758764,
+  17.221300000528572,
+  17.04510000126902,
+  16.92380000167759,
+  16.734800003177952,
+  16.523500002222136,
+  16.87560000209487,
+  17.84840000254917,
+  17.830999997386243,
+  16.891299997951137,
+  16.342099999747006,
+  16.543699999601813,
+  16.15519999904791,
+  15.998599999875296
+ ],
+ "jawaban": [
+  "JAWABAN: YA. Graph database (Neo4j) dapat dikombinasikan dengan relational database biasa (SQLite), dan hasil gabungannya benar.",
+  "Bukti kebenaran: 27/27 tes inti lulus (konsistensi, sinkronisasi, fungsi hybrid, kesetaraan hasil); 14/14 pasangan query memberi hasil identik di SQLite dan Neo4j.",
+  "Pembagian tugas, Neo4j lebih cepat pada: Teman tepat 3 relasi: himpunan unik (1.1×); Teman tepat 4 relasi: himpunan unik (1.4×); Teman tepat 3 relasi: semua path (1.2×); Teman tepat 4 relasi: semua path (1.2×); Teman tepat 3 relasi: JOIN vs pruning (8.2×); Jalur terpendek (maks 8 relasi) (37.1×).",
+  "Pembagian tugas, SQLite lebih cepat pada: Pencarian titik (user_id) (52.3×); Agregasi atribut (GROUP BY gender) (2.1×); Agregasi struktur (top-10 out-degree) (4.1×); Rekomendasi teman (top-10) (5.0×); Teman tepat 1 relasi: himpunan unik (14.0×); Teman tepat 2 relasi: himpunan unik (3.1×); Teman tepat 2 relasi: semua path (2.0×); Teman dari teman + filter atribut (2.0×).",
+  "Biaya kombinasi: strategi hybrid (id dari Neo4j, filter di SQLite) 19× lebih lambat daripada semua-di-SQLite dan 10× daripada semua-di-Neo4j, tetapi tidak menduplikasi atribut; mengambil atribut 4,505 user: SQLite 8.9 ms vs Neo4j 131.5 ms; biaya tetap per panggilan: SQLite 0.006 ms vs Neo4j 0.84 ms; atribut yang diduplikasi bisa tidak sinkron: 3 penyimpangan disuntik, 3 terdeteksi, diperbaiki dalam 37 ms.",
+  "Batas: sampel 4.505 user dan 72.004 relasi di satu komputer; angka kinerja berlaku untuk skala ini (uji graf sintetis hanya sampai ±0,5 juta relasi)."
+ ],
+ "profil_graf": {
+  "user": 4505,
+  "edge": 72004,
+  "resiprositas": 0.7112382645408588,
+  "terisolasi": 0.11143174250832408,
+  "median_out_degree": 10.0,
+  "maks_out_degree": 185,
+  "klasterisasi_rata2": 0.18842004391214845,
+  "komponen_terbesar": 0.8832408435072142,
+  "diameter_perkiraan": 8,
+  "diameter_efektif_90": 4.0
+ },
+ "kecepatan": {
+  "Neo4j menyala dari mati (detik)": 12.6,
+  "Neo4j, query yang sama: panggilan ke-1 vs stabil (ms)": "458 vs 17",
+  "Sinkron ulang seluruh graf ke Neo4j, script 03 (detik)": 3.3,
+  "Biaya per path, SQLite JOIN (mikrodetik)": 0.403,
+  "Biaya per path, Neo4j count(p) (mikrodetik)": 0.321
+ }
+}

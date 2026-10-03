@@ -1,0 +1,6 @@
+hipotesis,pernyataan,hasil,bukti
+H1,Dua basis data konsisten dan hasil gabungan sama persis dengan jawaban kunci,DIDUKUNG,17/17 tes lulus
+H2,Pertanyaan yang sama dijawab identik; beda di kinerja dan kemudahan menulis query,DIDUKUNG,14/14 pasangan query identik; median token SQL 46 vs Cypher 17
+H3,"Neo4j lebih cepat untuk penelusuran multi-hop, dan selisihnya membesar dengan kedalaman dan jumlah path",SEBAGIAN,"rasio SQLite/Neo4j (di atas 1 = Neo4j lebih cepat): himpunan unik k=2 0.30×, k=3 1.12×, k=4 1.36×; semua path k=2 0.45×, k=3 1.19×, k=4 1.21×; JOIN vs pruning k=3 8.40×; jalur terpendek 34.34×; hub graf sintetis (SQL/Neo4j): 135,801 edge: semua path 1.34×, unik 1.50×, 544,025 edge: semua path 1.17×, unik 1.26×"
+H4,SQLite setara atau lebih cepat untuk pencarian titik dan agregasi atribut,DIDUKUNG,"rasio SQLite/Neo4j: pencarian titik 0.020, agregasi atribut 0.472, agregasi struktur 0.233 (di bawah 1 = SQLite lebih cepat)"
+H5,Duplikasi atribut menimbulkan risiko ketidaksinkronan yang dapat dideteksi otomatis,DIDUKUNG,"3 ketidaksinkronan disuntik, 3 terdeteksi (tepat: True), 0 tersisa setelah perbaikan"
